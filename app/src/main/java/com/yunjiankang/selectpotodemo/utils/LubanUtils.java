@@ -54,7 +54,7 @@ import top.zibin.luban.OnCompressListener;
  * 类描述:
  * 创建人:zhengleilei.
  * 创建时间:2020/9/08 16:26
- * 邮箱:zhengll@wbpharma.com
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */

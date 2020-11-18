@@ -1,4 +1,4 @@
-package com.yunjiankang.selectpotodemo;
+package com.yunjiankang.selectpotodemo.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +16,11 @@ import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.constant.Type;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.stx.xhb.xbanner.XBanner;
+import com.yunjiankang.selectpotodemo.R;
+import com.yunjiankang.selectpotodemo.adapter.PhptpAdapter1;
+import com.yunjiankang.selectpotodemo.base.BaseActivity;
+import com.yunjiankang.selectpotodemo.utils.Divider;
+import com.yunjiankang.selectpotodemo.utils.GlideEngine;
 import com.yunjiankang.selectpotodemo.utils.LubanUtils;
 
 import java.io.File;
@@ -60,15 +65,15 @@ import butterknife.OnClick;
  * .                  不见满街漂亮妹，哪个归得程序员？
  * .
  * 项目名称: selectPotoDemo
- * 类名称: SelectPotoActivity
+ * 类名称: SelectPotoActivity1
  * 类描述:
  * 创建人:zhengleilei.
- * 创建时间:2020/3/5 10:45
- * 邮箱:zhengll@wbpharma.com
+ * 创建时间:2020/11/18 16:07
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */
-public class SelectPotoActivity extends BaseActivity {
+public class SelectPotoActivity1 extends BaseActivity {
 
 
     @BindView(R.id.iv_item0)
@@ -82,10 +87,6 @@ public class SelectPotoActivity extends BaseActivity {
     @BindView(R.id.tv_item0)
     TextView tvItem0;
 
-    //TODO 图片选择参考  https://github.com/HuanTanSheng/EasyPhotos
-    //TODO 图片压缩参考  https://github.com/Curzibn/Luban
-    //TODO 视频压缩参考
-
     private ArrayList<Photo> showOnePhoto = new ArrayList<>();//原始单图片
     private ArrayList<Photo> showMorePhoto = new ArrayList<>();//原始多图片
     private ArrayList<Photo> showVideoPhoto = new ArrayList<>();//原始视频路径
@@ -96,34 +97,35 @@ public class SelectPotoActivity extends BaseActivity {
     private ArrayList<File> newVideoFiles = new ArrayList<>();//压缩后的视频
 
 
-    private PhptpAdapter photoAdapter;//图片的九宫格布局数据
+    private PhptpAdapter1 photoAdapter;//图片的九宫格布局数据
 
     private int type;//选择是几个图片
     private PopupWindow popWindow;//显示图片
 
     @Override
-    int getViewId() {
-        return R.layout.activity_select_poto;
+    public int getViewId() {
+        return R.layout.activity_select_poto1;
     }
 
 
     @Override
-    void initData() {
+    public void initData() {
+        showToast("回传做了清空处理可在212--222行代码作处理");
         rvItem0 = findViewById(R.id.rv_item0);
 
         rvItem0.setLayoutManager(new GridLayoutManager(this, 3));
 
         rvItem0.addItemDecoration(
                 Divider.builder().
-                        color(getResources().getColor(R.color.color_white))
+                        color(getResources().getColor(R.color.colorWhite))
                         .height(6)
                         .build()
         );
-        photoAdapter = new PhptpAdapter(this, showMorePhoto, (GridLayoutManager) rvItem0.getLayoutManager());
+        photoAdapter = new PhptpAdapter1(this, showMorePhoto, (GridLayoutManager) rvItem0.getLayoutManager());
         rvItem0.setAdapter(photoAdapter);
 
 
-        photoAdapter.setAddDrugreCordAdapterListener(new PhptpAdapter.AddDrugreCordAdapterListener() {
+        photoAdapter.setAddDrugreCordAdapterListener(new PhptpAdapter1.AddDrugreCordAdapterListener() {
             @Override
             public void itemClick(int position) {//设置添加
                 openImage(9);
@@ -158,7 +160,7 @@ public class SelectPotoActivity extends BaseActivity {
                 break;
             case R.id.iv_close:
                 showOnePhoto.clear();
-                Glide.with(SelectPotoActivity.this)
+                Glide.with(SelectPotoActivity1.this)
                         .load(getResources().getDrawable(R.drawable.btn_add_pic))
                         .thumbnail(0.1f)
                         .into(ivItem0);
@@ -167,12 +169,11 @@ public class SelectPotoActivity extends BaseActivity {
             case R.id.iv_item1://选择视频
                 openImage(101);
                 break;
-            case R.id.tv_item0://上传
-//                showToast("上传需要上传这个文件" + showMorePhoto.size());
+            case R.id.tv_item0://删除
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        LubanUtils.getInstance().deleteFile(SelectPotoActivity.this);
+                        LubanUtils.getInstance().deleteFile(SelectPotoActivity1.this);
                     }
                 }).start();
 
@@ -203,20 +204,23 @@ public class SelectPotoActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (showOnePhoto.size() != 0) {
-            showOnePhoto.clear();
-        }
-        if (showMorePhoto.size() != 0) {
-            showMorePhoto.clear();
-        }
-        if (showVideoPhoto.size() != 0) {
-            showVideoPhoto.clear();
-        }
         if (RESULT_OK == resultCode) {//是否已经选择
             if (requestCode == type && data != null) {//相机或相册回调
                 ArrayList<Photo> resultPhotos = data.getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
                 boolean selectedOriginal = data.getBooleanExtra(EasyPhotos.RESULT_SELECTED_ORIGINAL, false);//判断用户是否选择了原图
                 assert resultPhotos != null;
+                if (resultPhotos.size() != 0) {
+                    if (showOnePhoto.size() != 0) {
+                        showOnePhoto.clear();
+                    }
+                    if (showMorePhoto.size() != 0) {
+                        showMorePhoto.clear();
+                    }
+                    if (showVideoPhoto.size() != 0) {
+                        showVideoPhoto.clear();
+                    }
+                }
+
                 if (type == 1) {
                     showOnePhoto.addAll(resultPhotos);//单个图片
                     //处理数据
@@ -259,7 +263,7 @@ public class SelectPotoActivity extends BaseActivity {
         } else if (RESULT_CANCELED == resultCode) {//没有数据的回传  显示默认的图片
             if (type == 1) {
                 ivClose.setVisibility(View.GONE);
-                Glide.with(SelectPotoActivity.this)
+                Glide.with(SelectPotoActivity1.this)
                         .load(getResources().getDrawable(R.drawable.btn_add_pic))
                         .thumbnail(0.1f)
                         .into(ivItem0);
@@ -296,7 +300,7 @@ public class SelectPotoActivity extends BaseActivity {
 
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
-                Glide.with(SelectPotoActivity.this).load(selectedPhotoList.get(position).uri).into((ImageView) view);//设置图片为默认图片
+                Glide.with(SelectPotoActivity1.this).load(selectedPhotoList.get(position).uri).into((ImageView) view);//设置图片为默认图片
             }
         });
 
@@ -318,13 +322,13 @@ public class SelectPotoActivity extends BaseActivity {
     private void uploadDocRegInfoImg(ArrayList<File> newFiles, int type) {
         if (type == 1) {//单图
             ivClose.setVisibility(View.VISIBLE);
-            Glide.with(SelectPotoActivity.this)
+            Glide.with(SelectPotoActivity1.this)
                     .load(newFiles.get(0).getAbsolutePath())
                     .thumbnail(0.1f)
                     .into(ivItem0);
             String file1 = String.valueOf(new File(showOnePhoto.get(0).path).length());//原始大小
             String file2 = String.valueOf(newFiles.get(0).length());//原始大小
-            showToast("大小:" + file1 + "----------" + file2);
+            showToast("原始大小:" + file1 + "--------压缩后的大小:--" + file2);
         } else if (type == 9) {//多图
             int showPhotoMoreLength = 0;
             int newPhotoMoreLength = 0;
@@ -334,17 +338,13 @@ public class SelectPotoActivity extends BaseActivity {
             for (int a = 0; a < newFiles.size(); a++) {
                 newPhotoMoreLength += newFiles.get(a).length();
             }
-            showToast("大小:" + showPhotoMoreLength + "----------" + newPhotoMoreLength);
-//            luBanSelectPhotoMore.clear();
-//            luBanSelectPhotoMore.addAll(luBanSelectPhotoMore);
+            showToast("原始大小:" + showPhotoMoreLength + "--------压缩后的大小:--" + newPhotoMoreLength);
             photoAdapter.notifyDataSetChanged();
         } else if (type == 101) {//视频
             String file1 = String.valueOf(new File(showVideoPhoto.get(0).path).length());//原始大小
             String file2 = String.valueOf(newFiles.get(0).length());//原始大小
-            showToast("大小:" + file1 + "----------" + file2);
-//            selectedVideo.clear();
-//            selectedVideo.addAll(resultPhotos);
-            Glide.with(SelectPotoActivity.this)
+            showToast("这个没有压缩" + "原始大小:" + file1 + "--" + file2);
+            Glide.with(SelectPotoActivity1.this)
                     .load(showVideoPhoto.get(0).uri)
                     .thumbnail(0.1f)
                     .into(ivItem1);

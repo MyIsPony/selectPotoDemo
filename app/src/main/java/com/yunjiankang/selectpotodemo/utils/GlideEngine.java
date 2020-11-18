@@ -1,4 +1,4 @@
-package com.yunjiankang.selectpotodemo;
+package com.yunjiankang.selectpotodemo.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -49,7 +49,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  * 类描述:
  * 创建人:zhengleilei.
  * 创建时间:2020/3/10 11:50
- * 邮箱:zhengll@wbpharma.com
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */

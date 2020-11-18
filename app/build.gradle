@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
-
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.yunjiankang.selectpotodemo"
-        minSdkVersion 22
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,19 +21,35 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dexOptions {
+//        incremental true
+        javaMaxHeapSize "4g"
+    }
+
+    //打正式包需要调试
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13'
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
+    implementation 'com.android.support:multidex:1.0.3'//避免64k
 
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
@@ -46,7 +62,7 @@ dependencies {
     //轮播图
     implementation 'com.github.xiaohaibin:XBanner:1.7.0'
     //权限
-    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.hjq:xxpermissions:9.2'
     //图片压缩
     implementation 'top.zibin:Luban:1.1.8'
     //图片和视频选择
@@ -56,5 +72,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.lzy.net:okgo:3.0.4'
 
 }

@@ -1,4 +1,4 @@
-package com.yunjiankang.selectpotodemo;
+package com.yunjiankang.selectpotodemo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
+import com.yunjiankang.selectpotodemo.R;
 
 import java.util.ArrayList;
 
@@ -51,11 +52,11 @@ import androidx.recyclerview.widget.RecyclerView;
  * 类描述:选择图片正方
  * 创建人:zhengleilei.
  * 创建时间:2020/3/10 11:21
- * 邮箱:zhengll@wbpharma.com
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */
-public class PhptpAdapter extends RecyclerView.Adapter<PhptpAdapter.PhotoViewHolder> {
+public class PhptpAdapter1 extends RecyclerView.Adapter<PhptpAdapter1.PhotoViewHolder> {
 
     private ArrayList<Photo> photoPaths;
     private LayoutInflater inflater;
@@ -70,7 +71,7 @@ public class PhptpAdapter extends RecyclerView.Adapter<PhptpAdapter.PhotoViewHol
 
     private AddDrugreCordAdapterListener addDrugreCordAdapterListener;
 
-    public PhptpAdapter(Context mContext, ArrayList<Photo> photoPaths, GridLayoutManager gridLayoutManager) {
+    public PhptpAdapter1(Context mContext, ArrayList<Photo> photoPaths, GridLayoutManager gridLayoutManager) {
         this.photoPaths = photoPaths;
         this.mContext = mContext;
         inflater = LayoutInflater.from(mContext);

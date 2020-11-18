@@ -227,7 +227,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="删除"
+                    android:text="删除整个压缩文件并更新相册"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 

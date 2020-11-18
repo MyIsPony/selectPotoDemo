@@ -1,4 +1,4 @@
-package com.yunjiankang.selectpotodemo;
+package com.yunjiankang.selectpotodemo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
+import com.yunjiankang.selectpotodemo.R;
 
 import java.util.ArrayList;
 
@@ -50,12 +51,12 @@ import androidx.recyclerview.widget.RecyclerView;
  * 类名称: PhptpAdapter11
  * 类描述: 选中图片倒放
  * 创建人:zhengleilei.
- * 创建时间:2020/3/10 11:21
- * 邮箱:zhengll@wbpharma.com
+ * 创建时间:2020/3/10 11:21om
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */
-public class PhptpAdapter11 extends RecyclerView.Adapter<PhptpAdapter11.PhotoViewHolder11> {
+public class PhptpAdapter2 extends RecyclerView.Adapter<PhptpAdapter2.PhotoViewHolder11> {
 
     private ArrayList<Photo> photoPaths;
     private LayoutInflater inflater;
@@ -70,7 +71,7 @@ public class PhptpAdapter11 extends RecyclerView.Adapter<PhptpAdapter11.PhotoVie
 
     private AddDrugreCordAdapterListener addDrugreCordAdapterListener;
 
-    public PhptpAdapter11(Context mContext, ArrayList<Photo> photoPaths, GridLayoutManager gridLayoutManager) {
+    public PhptpAdapter2(Context mContext, ArrayList<Photo> photoPaths, GridLayoutManager gridLayoutManager) {
         this.photoPaths = photoPaths;
         this.mContext = mContext;
         inflater = LayoutInflater.from(mContext);

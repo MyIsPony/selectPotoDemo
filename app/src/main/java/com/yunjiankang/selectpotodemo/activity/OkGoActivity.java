@@ -1,7 +1,13 @@
-package com.yunjiankang.selectpotodemo;
+package com.yunjiankang.selectpotodemo.activity;
 
-import android.app.Application;
-import android.content.Context;
+import android.util.Log;
+
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
+import com.yunjiankang.selectpotodemo.R;
+import com.yunjiankang.selectpotodemo.base.BaseActivity;
 
 /**
  * .                            _ooOoo_
@@ -36,21 +42,47 @@ import android.content.Context;
  * .                  不见满街漂亮妹，哪个归得程序员？
  * .
  * 项目名称: selectPotoDemo
- * 类名称: App
+ * 类名称: OkGoActivity
  * 类描述:
  * 创建人:zhengleilei.
- * 创建时间:2020/3/5 10:04
- * 邮箱:zhengll@wbpharma.com
+ * 创建时间:2020/11/18 16:11
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */
-public class App extends Application {
-
-    public static Context mContext;
+public class OkGoActivity extends BaseActivity {
+    @Override
+    public int getViewId() {
+        return R.layout.activity_okgo;
+    }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        mContext = this;
+    public void initData() {
+
+        //普通的网络请求
+
+        OkGo.<String>post("您的URL")
+                .tag(this)//
+                .params("kay", "value")
+                .retryCount(3)//几次重连
+                .execute(new StringCallback() {
+                    @Override
+                    public void onStart(Request<String, ? extends Request> request) {
+                        super.onStart(request);
+                        Log.e("select", "开始请求");
+                    }
+
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.e("select", "请求成功");
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Log.e("select", "请求失败");
+                    }
+                });
+
     }
 }

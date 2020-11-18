@@ -3,14 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
 
     <TextView
-        android:id="@+id/tv_item0"
+        android:id="@+id/tv_item1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:text="Hello World!" />
+        android:text="图片选择一包含压缩" />
+
+    <TextView
+        android:id="@+id/tv_item2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="图片选择二包含压缩" />
+
+    <TextView
+        android:id="@+id/tv_item3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="OkGo基本请求" />
+
+    <TextView
+        android:id="@+id/tv_item4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="OkGo文件下载" />
 
 </LinearLayout>

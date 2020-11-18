@@ -1,4 +1,4 @@
-package com.yunjiankang.selectpotodemo;
+package com.yunjiankang.selectpotodemo.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
  * 类描述:
  * 创建人:zhengleilei.
  * 创建时间:2020/3/5 09:59
- * 邮箱:zhengll@wbpharma.com
+ * 邮箱:lifetime0911@163.com
  * 修改备注:
  * 版本号:V 1.0.0
  */
@@ -59,13 +59,13 @@ public abstract class BaseActivity extends Activity {
         initData();
     }
 
-    abstract int getViewId();//布局
+   public abstract int getViewId();//布局
 
 
-    abstract void initData();//初始化数据
+    public  abstract void initData();//初始化数据
 
 
-    void showToast(String msg) {
+    public  void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
