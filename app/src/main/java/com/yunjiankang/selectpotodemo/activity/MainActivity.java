@@ -24,6 +24,8 @@ public class MainActivity extends BaseActivity {
     TextView tvItem3;
     @BindView(R.id.tv_item4)
     TextView tvItem4;
+    @BindView(R.id.tv_item5)
+    TextView tvItem5;
 
     @Override
     public int getViewId() {
@@ -42,7 +44,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({ R.id.tv_item1, R.id.tv_item2, R.id.tv_item3, R.id.tv_item4})
+    @OnClick({R.id.tv_item1, R.id.tv_item2, R.id.tv_item3, R.id.tv_item4, R.id.tv_item5})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_item1://图片选择一
@@ -56,8 +58,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.tv_item4://OKGO下载文件
                 Intent intent = new Intent(getApplicationContext(), UpdateService.class);
-                intent.putExtra("download", "您的文件名称");
+                intent.putExtra("download", "您的文件名称地址");
                 getApplicationContext().startService(intent);
+                break;
+            case R.id.tv_item5:
+                startActivity(new Intent(MainActivity.this, OkGoUploadActivity.class));
                 break;
         }
     }

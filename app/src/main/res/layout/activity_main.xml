@@ -38,4 +38,12 @@
         android:gravity="center"
         android:text="OkGo文件下载" />
 
+    <TextView
+        android:id="@+id/tv_item5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="OkGo文件上传--图片" />
+
 </LinearLayout>

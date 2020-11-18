@@ -6,6 +6,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+
 import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 
@@ -84,5 +86,11 @@ public abstract class BaseActivity extends Activity {
         lp.alpha = bgAlpha;
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         this.getWindow().setAttributes(lp);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkGo.getInstance().cancelTag(this);
     }
 }
